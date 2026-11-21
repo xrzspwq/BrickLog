@@ -1,0 +1,19 @@
+BRICKLOG — RELEASE BUILD SCRIPTS
+
+These scripts build usable apps, but you must run each desktop build on its target operating system. The ZIP contains source and build scripts, not prebuilt desktop applications. Keep LegoQuest and BrickLog-Python side by side; desktop builds use the shared Android assets.
+
+WINDOWS: Install Python 3.10+ (include the py launcher) and Microsoft Edge WebView2 Runtime. Open BrickLog-Python and double-click build-windows.bat. The generated release-output/BrickLog-Windows.zip contains BrickLog/BrickLog.exe and its supporting files; extract the entire folder and run the EXE. Windows may warn because it is unsigned.
+
+MACOS: Install Python 3.10+. In Terminal, cd to BrickLog-Python, then run chmod +x build-desktop.sh && ./build-desktop.sh. Open release-output/BrickLog-macOS.zip to extract BrickLog.app. The app is unsigned and not notarized; macOS may block it. Build on macOS and for your machine architecture.
+
+LINUX: Install Python 3.10+, venv/pip, PyGObject, GTK 3 and WebKitGTK 4.1 system packages. In a terminal, cd to BrickLog-Python, then run chmod +x build-desktop.sh && ./build-desktop.sh. Extract release-output/BrickLog-Linux.tar.gz and run BrickLog/BrickLog. Keep the whole folder together; GTK/WebKit runtime libraries are still needed on the target machine. Build on a compatible Linux distribution/architecture.
+
+ANDROID: Install Python 3.10+, JDK 17 or 21, Android SDK 35 and build tools (e.g. via Android Studio). Set ANDROID_HOME or configure the SDK location in Android Studio. Run LegoQuest/build-android.bat on Windows or ./build-android.sh on macOS/Linux and choose:
+1. Installable debug APK (default): no signing setup; Android automatically creates or reuses a debug key. Not for Play Store release.
+2. Unsigned release APK: no signing key needed, but Android cannot install it until it is signed.
+3. Signed release APK: requires a private release keystore. Securely back it up and reuse it for future updates.
+The resulting APK is in LegoQuest/release-output/. The menu does not contain or share any signing keys.
+
+Existing installations signed with a different key cannot be updated with a new APK; export a JSON backup before uninstalling. Do not uninstall until you have verified the backup. A keystore generated on one computer needs to be securely backed up and reused on future builds.
+
+To transfer progress between devices, export a JSON backup and import it on the other device. Import replaces its current data, so back up the destination first. There is no cloud sync. Desktop packages and Android APK have not been tested on every OS/device. This is an unofficial app with third-party artwork; obtain permission before redistributing.

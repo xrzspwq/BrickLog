@@ -1,0 +1,37 @@
+# Python environments, caches and builds
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+build/
+dist/
+release-output/
+
+# Gradle and Android local/build output
+.gradle/
+.android/
+local.properties
+*.apk
+*.aab
+
+# Signing materials and secrets; keep these outside the repository
+*.jks
+*.keystore
+*.p12
+*.pfx
+key.properties
+.env
+.env.*
+!.env.example
+
+# User backups and packaged archives
+*backup*.json
+*.zip
+*.tar.gz
+
+# IDE / operating system
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
