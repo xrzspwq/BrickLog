@@ -1,0 +1,37 @@
+plugins { id 'com.android.application' }
+
+def signingPath = System.getenv('BRICKLOG_KEYSTORE')
+def signingStorePassword = System.getenv('BRICKLOG_STORE_PASSWORD')
+def signingAlias = System.getenv('BRICKLOG_KEY_ALIAS')
+def signingKeyPassword = System.getenv('BRICKLOG_KEY_PASSWORD')
+def hasReleaseKey = signingPath && signingStorePassword && signingAlias && signingKeyPassword
+
+android {
+    namespace 'com.bricklog.app'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'com.bricklog.app'
+        minSdk 24
+        targetSdk 35
+        versionCode 4
+        versionName '1.3'
+    }
+    signingConfigs {
+        release {
+            if (hasReleaseKey) {
+                storeFile file(signingPath)
+                storePassword signingStorePassword
+                keyAlias signingAlias
+                keyPassword signingKeyPassword
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            if (hasReleaseKey) signingConfig signingConfigs.release
+        }
+    }
+}
+// Without signing credentials, assembleRelease produces an unsigned APK.
+// Android cannot install it until it has been signed.
