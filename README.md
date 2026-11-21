@@ -144,6 +144,10 @@ Desktop build scripts create a virtual environment and install the pinned depend
 
 Use the app's JSON export/import feature and verify backups regularly. To transfer progress from Android to desktop, export on Android, copy the JSON file to the computer, then import it on desktop. Import replaces the destination's current catalogue and progress, so back up the destination first. The app does not provide online account sync. Local data can be lost when app storage is cleared or the app is uninstalled. Desktop uses a local-only server on `127.0.0.1:18765`; its port must remain stable for the local storage origin. If the port is in use, close the other process or another copy of BrickLog.
 
+## Security and privacy
+
+BrickLog uses local storage and unencrypted JSON backups. Online catalogue refresh, fonts, images and external links still contact third parties. The app includes URL checks, a content security policy, limited desktop asset serving and stricter backup validation. Read [SECURITY.md](SECURITY.md) for the protections, residual risks and safe-use guidance.
+
 ## Artwork and licensing
 
 The catalogue draws on Wikipedia and other sources, which have their own licensing and attribution requirements. Bundled game images may be copyrighted, non-free, screenshots or icons rather than official covers; image source links appear in game details. The brick icon is a cropped/resized image from [Brick Owl](https://www.brickowl.com/catalog/lego-dark-purple-brick-2-x-2-3003); its reuse license has not been verified. No blanket license for third-party assets is granted here. Review permissions and attribution before uploading the repository publicly or distributing builds. No open-source license for the project code has been selected; the owner should choose one only after reviewing rights to all included material.

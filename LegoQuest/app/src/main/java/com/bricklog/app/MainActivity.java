@@ -29,8 +29,14 @@ public class MainActivity extends Activity {
         web = new WebView(this);
         web.getSettings().setJavaScriptEnabled(true);
         web.getSettings().setDomStorageEnabled(true);
+        web.getSettings().setAllowFileAccess(false);
+        web.getSettings().setAllowFileAccessFromFileURLs(false);
+        web.getSettings().setAllowUniversalAccessFromFileURLs(false);
+        web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);
         web.addJavascriptInterface(new Object() {
             @JavascriptInterface public void exportBackup(String json) {
+                // The bridge only supports exporting a bounded JSON document.
+                if (json == null || json.length() > 20 * 1024 * 1024) return;
                 pendingBackup = json;
                 Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType("application/json").putExtra(Intent.EXTRA_TITLE, "bricklog-backup.json");
                 startActivityForResult(intent, 42);
@@ -62,11 +68,13 @@ public class MainActivity extends Activity {
                 return null;
             }
             @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                if (!"app.bricklog.local".equals(request.getUrl().getHost())) {
-                    try { startActivity(new android.content.Intent(android.content.Intent.ACTION_VIEW, request.getUrl())); } catch (Exception ignored) {}
-                    return true;
+                Uri uri = request.getUrl();
+                String scheme = uri.getScheme();
+                if ("https".equalsIgnoreCase(scheme) && "app.bricklog.local".equals(uri.getHost())) return false;
+                if ("https".equalsIgnoreCase(scheme) || "http".equalsIgnoreCase(scheme)) {
+                    try { startActivity(new Intent(Intent.ACTION_VIEW, uri).addCategory(Intent.CATEGORY_BROWSABLE)); } catch (Exception ignored) {}
                 }
-                return false;
+                return true;
             }
         });
         FrameLayout root = new FrameLayout(this);

@@ -41,6 +41,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
         self.send_header('Content-Length', str(len(data)))
         self.send_header('Cache-Control', 'no-store')
         self.send_header('X-Content-Type-Options', 'nosniff')
+        self.send_header('X-Frame-Options', 'DENY')
+        self.send_header('Referrer-Policy', 'no-referrer')
         self.end_headers()
         self.wfile.write(data)
 
@@ -56,7 +58,9 @@ class Server(socketserver.ThreadingMixIn, http.server.HTTPServer):
 class Api:
     def open_external(self, url):
         parsed = urllib.parse.urlsplit(url)
-        if parsed.scheme in ('http', 'https') and parsed.hostname:
+        if (parsed.scheme in ('http', 'https') and parsed.hostname
+                and not parsed.username and not parsed.password
+                and len(url) <= 4096 and not any(ord(c) < 32 or ord(c) == 127 for c in url)):
             webbrowser.open(url)
 
 
