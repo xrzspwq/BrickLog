@@ -55,3 +55,8 @@ cmd /c 'set "JAVA_HOME=C:\Tools\jdk-21" && set "ANDROID_HOME=%LOCALAPPDATA%\Andr
 Both settings apply only to that child process. Substitute your actual paths. If the SDK directory does not exist, find or install it in Android Studio → Settings → Languages & Frameworks → Android SDK, including Android SDK Platform 35 and Build Tools. The root README has full details.
 
 Android 15 and newer: the Android activity applies system-bar and display-cutout insets so the interface does not sit beneath the notification or navigation bars. Older Android versions use the system default layout.
+
+## Genre filter
+Each game has one broad, editable primary genre. The genre filter is in the catalogue toolbar; open a game to choose a genre or reset it to the catalogue default. Uncertain and newly added titles are Unclassified. Genre overrides are saved with progress and included in JSON backups. Genre labels are approximate editorial classifications, not authoritative.
+
+LEGO My Style games are excluded from the bundled catalogue, cached catalogues, imports, manual additions and Wikipedia refreshes. Existing progress records are retained rather than deleted.

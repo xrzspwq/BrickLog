@@ -1,6 +1,6 @@
 # BrickLog
 
-BrickLog is an **unofficial** LEGO video-game collection tracker for Android and desktop. Track played status, completion percentage, notes and platforms; browse covers and descriptions; filter the catalogue; add games; and export or import JSON backups. The catalogue starts from [Wikipedia's list of Lego video games](https://en.wikipedia.org/wiki/List_of_Lego_video_games), with additional entries. It may be incomplete or contain inaccurate data. Store links are searches, not guarantees that a game is available.
+BrickLog is an **unofficial** LEGO video-game collection tracker for Android and desktop. Track played status, completion percentage, notes and platforms; browse covers and descriptions; filter the catalogue by genre, franchise and platform; add games; and export or import JSON backups. The catalogue starts from [Wikipedia's list of Lego video games](https://en.wikipedia.org/wiki/List_of_Lego_video_games), with additional entries. It may be incomplete or contain inaccurate data. LEGO My Style, DUPLO, LEGO Friends and known promotional-disc titles are excluded. Store links are searches, not guarantees that a game is available.
 
 The desktop app uses Python and pywebview; **Node.js is not required**. Android and desktop share the interface and catalogue assets. Progress is stored on each device; transfer it manually with a JSON backup.
 
@@ -140,13 +140,19 @@ Extract `release-output/BrickLog-Linux.tar.gz`, keep the entire `BrickLog` folde
 
 Desktop build scripts create a virtual environment and install the pinned dependencies. The packaged desktop apps do not need Python on the destination computer. The desktop GUI and packages have not been tested on every platform or device. See [desktop details](BrickLog-Python/README.md).
 
+## Genres
+
+Use **All genres** above the catalogue to filter by a broad primary genre. Open a game to see its genre and change it using the **Genre** selector; choose **Catalogue default** to remove your override. Newly added or uncertain games are **Unclassified** until assigned. These are editorial, single-genre labels rather than definitive classifications; games can span multiple genres, and some titles may be misclassified. Genre corrections are stored with your progress and included in JSON backups. Existing progress is retained when upgrading.
+
+The initial classifications draw on general game descriptions, including [Gamelab designer Frank Lantz’s game descriptions](http://www.franklantz.net/work), [Wikipedia’s Bionicle: Matoran Adventures article](https://en.wikipedia.org/wiki/Bionicle:_Matoran_Adventures), [Metacritic’s WU-CRU listing](https://www.metacritic.com/game/lego-ninjago-wu-cru/details/) and the [LEGO Batman: Legacy of the Dark Knight product description](https://www.playstation.com/en-us/games/lego-batman-legacy-of-the-dark-knight/). The sources cover examples, not every assigned genre. Labels are editable if you disagree.
+
 ## Backups and local data
 
 Use the app's JSON export/import feature and verify backups regularly. To transfer progress from Android to desktop, export on Android, copy the JSON file to the computer, then import it on desktop. Import replaces the destination's current catalogue and progress, so back up the destination first. The app does not provide online account sync. Local data can be lost when app storage is cleared or the app is uninstalled. Desktop uses a local-only server on `127.0.0.1:18765`; its port must remain stable for the local storage origin. If the port is in use, close the other process or another copy of BrickLog.
 
 ## Security and privacy
 
-BrickLog uses local storage and unencrypted JSON backups. Online catalogue refresh, fonts, images and external links still contact third parties. The app includes URL checks, a content security policy, limited desktop asset serving and stricter backup validation. Read [SECURITY.md](SECURITY.md) for the protections, residual risks and safe-use guidance.
+BrickLog uses local storage and unencrypted JSON backups. Online catalogue refresh, fonts, images and external links still contact third parties. The app includes URL checks, a content security policy, limited desktop asset serving and stricter backup validation, but **no app can be guaranteed completely secure**. Read [SECURITY.md](SECURITY.md) for the protections, residual risks and safe-use guidance.
 
 ## Artwork and licensing
 
